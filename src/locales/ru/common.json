@@ -1,0 +1,34 @@
+{
+  "appName": "APEX",
+  "nav": {
+    "home": "Главная",
+    "about": "О нас",
+    "works": "Наши работы",
+    "technologies": "Технологии",
+    "experience": "Опыт",
+    "contact": "Контакты"
+  },
+  "buttons": {
+    "learnMore": "Узнать больше",
+    "contactUs": "Связаться с нами",
+    "discussProject": "Обсудить ваш проект",
+    "viewAll": "Посмотреть все",
+    "send": "Отправить"
+  },
+  "footer": {
+    "rights": "© 2025 APEX. Все права защищены.",
+    "address": "123 Технопарк, Москва, Россия",
+    "phone": "+7 (555) 123-4567",
+    "email": "info@apex-dev.com"
+  },
+  "form": {
+    "name": "Имя",
+    "email": "Email",
+    "message": "Сообщение",
+    "subject": "Тема",
+    "phone": "Телефон",
+    "submit": "Отправить",
+    "required": "Обязательное поле",
+    "validEmail": "Пожалуйста, введите корректный email"
+  }
+}

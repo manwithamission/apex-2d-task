@@ -1,0 +1,34 @@
+{
+  "appName": "APEX",
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "works": "Our Works",
+    "technologies": "Technologies",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us",
+    "discussProject": "Discuss Your Project",
+    "viewAll": "View All",
+    "send": "Send"
+  },
+  "footer": {
+    "rights": "© 2025 APEX. All rights reserved.",
+    "address": "123 Tech Park, Silicon Valley, CA",
+    "phone": "+1 (555) 123-4567",
+    "email": "info@apex-dev.com"
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "subject": "Subject",
+    "phone": "Phone",
+    "submit": "Submit",
+    "required": "Required field",
+    "validEmail": "Please enter a valid email"
+  }
+}
