@@ -13,10 +13,13 @@ export const App = () => {
       <div className={styles.appContainer}>
         <Header />
         <Main />
-        <About />
-        <WorksList />
-        <Technologies />
-        <DevExperience />
+        <div className={styles.middleContent}>
+          <div className={styles.bgCode} />
+          <About />
+          <WorksList />
+          <Technologies />
+          <DevExperience />
+        </div>
         <Footer />
       </div>
     </>

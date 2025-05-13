@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Header.module.scss";
 import { scrollToSection } from "../../utils/scrollUtils";
+import { cn } from "../../utils/classUtils";
+import { getBackgroundImage } from "../../utils/assetUtils";
+import { PixelIcon } from "../common/icons/PixelIcon";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -24,10 +27,6 @@ export const Header = () => {
     };
   }, []);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
   // Handle scroll-to-section with mobile menu closing
   const handleSectionClick = (sectionId: string, event: React.MouseEvent) => {
     console.log(sectionId, "sectionId");
@@ -38,23 +37,31 @@ export const Header = () => {
   };
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+    <header className={cn(styles.header, scrolled && styles.scrolled)}>
       <div className={styles.container}>
-        <div className={styles.logo}>
-          <h1>APEX</h1>
-        </div>
+        <a href="#main" className={styles.logo}>
+          <img
+            className={cn(styles.logoImage)}
+            src={getBackgroundImage("logo.png")}
+            alt="Logo"
+          />
+        </a>
 
-        <nav
-          className={`${styles.navigation} ${
-            mobileMenuOpen ? styles.active : ""
-          }`}
-        >
+        <nav className={cn(styles.navigation, mobileMenuOpen && styles.active)}>
           <ul>
-            <li onClick={(e) => handleSectionClick("main", e)}>Главная</li>
-            <li onClick={(e) => handleSectionClick("about", e)}>О нас</li>
+            <li>
+              <a href="#main" onClick={(e) => handleSectionClick("main", e)}>
+                [ work ]
+              </a>
+            </li>
+            <li>
+              <a href="#about" onClick={(e) => handleSectionClick("about", e)}>
+                [ about ]
+              </a>
+            </li>
             <li>
               <a href="#works" onClick={(e) => handleSectionClick("works", e)}>
-                Наши работы
+                [ services ]
               </a>
             </li>
             <li>
@@ -62,7 +69,7 @@ export const Header = () => {
                 href="#technologies"
                 onClick={(e) => handleSectionClick("technologies", e)}
               >
-                Технологии
+                [ technologies ]
               </a>
             </li>
             <li>
@@ -70,7 +77,7 @@ export const Header = () => {
                 href="#dev-experience"
                 onClick={(e) => handleSectionClick("dev-experience", e)}
               >
-                Опыт
+                [ blog ]
               </a>
             </li>
             <li>
@@ -78,21 +85,17 @@ export const Header = () => {
                 href="#contact"
                 onClick={(e) => handleSectionClick("contact", e)}
               >
-                Контакты
+                [ contact ]
               </a>
             </li>
           </ul>
         </nav>
 
-        <div
-          className={`${styles.mobileMenuBtn} ${
-            mobileMenuOpen ? styles.active : ""
-          }`}
-          onClick={toggleMobileMenu}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+        <div className={styles.btnWrapper}>
+          <button className={cn("btn", "primary", styles.quoteButton)}>
+            <p className={styles.quoteText}>[ get a quote ]</p>
+          </button>
+          <PixelIcon className={styles.pixelIcon} height={42} width={26} />
         </div>
       </div>
     </header>

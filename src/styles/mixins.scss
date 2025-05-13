@@ -1,0 +1,100 @@
+// Global SCSS mixins
+
+@mixin corner-borders-all($color: #000, $size: 10px, $thickness: 2px) {
+  .corner-tl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $size;
+    height: $size;
+    border-top: $thickness solid $color;
+    border-left: $thickness solid $color;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .corner-tr {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $size;
+    height: $size;
+    border-top: $thickness solid $color;
+    border-right: $thickness solid $color;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .corner-bl {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: $size;
+    height: $size;
+    border-bottom: $thickness solid $color;
+    border-left: $thickness solid $color;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .corner-br {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: $size;
+    height: $size;
+    border-bottom: $thickness solid $color;
+    border-right: $thickness solid $color;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+// Mixin to add square color accents to all four corners
+@mixin corner-squares($color: #07e0b0, $size: 16px) {
+  position: relative;
+  
+  .square-tl {
+    position: absolute;
+    left: -$size;
+    top: -$size;
+    width: $size;
+    height: $size;
+    background-color: $color;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .square-tr {
+    position: absolute;
+    right: -$size;
+    top: -$size;
+    width: $size;
+    height: $size;
+    background-color: $color;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .square-bl {
+    position: absolute;
+    left: -$size;
+    bottom: -$size;
+    width: $size;
+    height: $size;
+    background-color: $color;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .square-br {
+    position: absolute;
+    right: -$size;
+    bottom: -$size;
+    width: $size;
+    height: $size;
+    background-color: $color;
+    z-index: 1;
+    pointer-events: none;
+  }
+}

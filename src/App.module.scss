@@ -6,20 +6,17 @@
 
 :root {
   --primary-color: #07E0B0;
-  --secondary-color: #646cff;
-  --dark-bg: #242424;
+  --secondary-color: #036547;
+  --dark-background: #011301;
   --light-text: #ffffff;
-  --grey-text: #aaaaaa;
-  --section-spacing: 80px;
+  --section-spacing: 50px;
 }
 
 body {
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'IBM Plex Sans';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--dark-bg);
+  background-color: var(--dark-background);
   color: var(--light-text);
   line-height: 1.5;
   overflow-x: hidden;
@@ -30,128 +27,38 @@ body {
   width: 100%;
 }
 
+.middleContent {
+  position: relative;
+  z-index: 1;
+}
+
+.bgCode {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url('/public/images/backgrounds/bg-code.png');
+  background-size: cover;
+  background-position: bottom;
+}
+
 :global {
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-  }
-
-  section {
-    padding: var(--section-spacing) 0;
-    position: relative;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-
-  .section-header h2 {
-    font-size: 2.5rem;
-    color: var(--light-text);
-    margin-bottom: 15px;
-    position: relative;
-    display: inline-block;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 500;
-  }
-
-  .section-header h2::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 3px;
-    background-color: var(--primary-color);
-  }
-
-  .subheading {
-    font-size: 1.1rem;
-    color: var(--grey-text);
-  }
-
-  .highlight {
-    color: var(--primary-color);
-  }
-
   .btn {
-    display: inline-block;
-    padding: 12px 28px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 14px;
     border-radius: 4px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: 2px solid transparent;
-    font-family: 'IBM Plex Sans', sans-serif;
   }
 
   .primary {
-    background-color: var(--primary-color);
-    color: var(--dark-bg);
-    border-color: var(--primary-color);
+    background: var(--secondary-color);
+    border: 2px solid var(--primary-color);
   }
 
-  .primary:hover {
-    background-color: transparent;
-    color: var(--primary-color);
-  }
 
-  .secondary {
-    background-color: transparent;
-    color: var(--light-text);
-    border-color: var(--light-text);
-  }
-
-  .secondary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  /* Glass effect for card-like elements */
-  .glass-card {
-    background-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  :root {
-    --section-spacing: 60px;
-  }
-  
-  :global {
-    .section-header h2 {
-      font-size: 2rem;
-    }
-    
-    .subheading {
-      font-size: 1rem;
-    }
-    
-    .btn {
-      padding: 10px 20px;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --section-spacing: 40px;
-  }
-  
-  :global {
-    .section-header h2 {
-      font-size: 1.75rem;
-    }
-  }
 }
