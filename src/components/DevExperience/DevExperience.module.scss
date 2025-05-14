@@ -1,98 +1,144 @@
+@use "../../styles/mixins.scss" as mixins;
+
 .devExpSection {
   padding: 100px 0;
-  background-color: #242424;
+  margin-bottom: 64px;
 }
 
-.experienceGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
-}
-
-.experienceCard {
-  background-color: #1a1a1a;
-  border-radius: 8px;
-  padding: 30px;
+.container {
   display: flex;
-  gap: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  }
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.cardIcon {
-  flex-shrink: 0;
+.left  {
+  display: flex;
+  flex-direction: column;
+  max-width: 1900px;
+  margin: 0 auto;
 }
 
-.icon {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(7, 224, 176, 0.1);
-  border-radius: 50%;
+.right {
+  flex: 1;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  max-height: 460px;
+}
+
+.rightTop {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #07E0B0;
-  position: relative;
-  
-  &::before {
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+}
+
+.rightBottom {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-end;
+  max-width: 320px;
+  background: #002010;
+
+  @include mixins.corner-squares(#07e0b0, 14px);
+
+  .squareTl {
+    @extend .square-tl;
   }
-  
-  &.agile::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2307E0B0' viewBox='0 0 24 24'%3E%3Cpath d='M15 4a8 8 0 1 1-8 8 8 8 0 0 1 8-8m0-2a10 10 0 1 0 10 10A10 10 0 0 0 15 2zm-1 5h2v7h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E");
+
+  .squareTr {
+    @extend .square-tr;
   }
-  
-  &.testing::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2307E0B0' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+
+  .squareBl {
+    @extend .square-bl;
   }
-  
-  &.code::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2307E0B0' viewBox='0 0 24 24'%3E%3Cpath d='M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z'/%3E%3C/svg%3E");
-  }
-  
-  &.cicd::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2307E0B0' viewBox='0 0 24 24'%3E%3Cpath d='M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z'/%3E%3C/svg%3E");
-  }
-  
-  &.performance::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2307E0B0' viewBox='0 0 24 24'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/%3E%3C/svg%3E");
-  }
-  
-  &.architecture::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2307E0B0' viewBox='0 0 24 24'%3E%3Cpath d='M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z'/%3E%3C/svg%3E");
+
+  .squareBr {
+    @extend .square-br;
   }
 }
 
-.cardContent {
-  h3 {
-    color: white;
-    font-size: 1.3rem;
-    margin-bottom: 12px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 500;
+.count {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 235px;
+  line-height: 130%;
+  text-transform: uppercase;
+  color: #E4E4E4;
+
+  &:nth-child(3) {
+    margin-top: -180px;
   }
-  
-  p {
-    color: #bbb;
-    font-size: 0.95rem;
-    line-height: 1.6;
+
+  &:nth-child(1) {
+    background: linear-gradient(180deg, #FFFFFF 0%, #011301 80.5%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &:nth-child(2) {
+    background: linear-gradient(180deg, #FFFFFF 0%, #011301 80.5%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-top: -180px;
   }
 }
 
-@media (max-width: 768px) {
-  .experienceGrid {
-    grid-template-columns: 1fr;
-  }
+.arrowIcon {
+  margin-right: 32px;
+}
+
+.rightTopText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mediumText {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 130%;
+  color: #E4E4E4;
+}
+
+.boldText {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 78px;
+  line-height: 130%;
+  color: #E4E4E4;
+}
+
+.devText {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 130%;
+  text-transform: uppercase;
+  color: #E4E4E4;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #E4E4E4;
 }

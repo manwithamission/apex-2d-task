@@ -1,6 +1,7 @@
 .worksSection {
-  padding: 0 40px;
+  padding: 0px;
   max-width: 1900px;
+  margin: 0 auto;
 }
 
 .container {
@@ -11,6 +12,8 @@
   display: flex;
   justify-content: space-between;
   max-width: 800px;
+  margin-bottom: 126px;
+  padding: 0 40px;
 }
 
 .title {
@@ -30,5 +33,49 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
+  color: #E4E4E4;
+}
+
+.worksList {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 180px;
+}
+
+.workItem {
+  width: 600px;
+  height: 600px;
+  background-image: url('/images/projects/nxt.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  
+  &:nth-child(1) {
+    background-position: right;
+  }
+
+  &:nth-child(2) {
+    min-width: 600px;
+  }
+
+  &:nth-child(3) {
+    background-position: left;
+  }
+
+  &:not(:last-child) {
+    margin-right: 240px;
+  }
+}
+
+.nxtTitle {
+  position: absolute;
+  top: -40px;
+  left: -90px;
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 100px;
+  line-height: 100%;
+
   color: #E4E4E4;
 }

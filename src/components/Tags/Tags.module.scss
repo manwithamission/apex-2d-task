@@ -1,0 +1,19 @@
+.TagsContainer {
+  min-height: 580px;
+  max-width: 1900px;
+  margin: 0 auto;
+  z-index: 0;
+  
+  .canvasContainer {
+    width: 100%;
+    height: 100%;
+    
+    &:hover {
+      cursor: pointer; /* Show pointer cursor to indicate clickable elements */
+    }
+  }
+  
+  canvas {
+    max-width: 100%;
+  }
+}

@@ -66,20 +66,21 @@ export const Header = () => {
             </li>
             <li>
               <a
+                href="#dev-experience"
+                onClick={(e) => handleSectionClick("dev-experience", e)}
+              >
+                [ dev experience ]
+              </a>
+            </li>
+            <li>
+              <a
                 href="#technologies"
                 onClick={(e) => handleSectionClick("technologies", e)}
               >
                 [ technologies ]
               </a>
             </li>
-            <li>
-              <a
-                href="#dev-experience"
-                onClick={(e) => handleSectionClick("dev-experience", e)}
-              >
-                [ blog ]
-              </a>
-            </li>
+
             <li>
               <a
                 href="#contact"

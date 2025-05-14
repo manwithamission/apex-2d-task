@@ -17,10 +17,10 @@ export const App = () => {
           <div className={styles.bgCode} />
           <About />
           <WorksList />
-          <Technologies />
           <DevExperience />
+          <Technologies />
+          <Footer />
         </div>
-        <Footer />
       </div>
     </>
   );

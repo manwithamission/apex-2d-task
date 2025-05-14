@@ -1,77 +1,55 @@
+@use "../../styles/mixins.scss" as mixins;
+
 .techSection {
   padding: 100px 0;
-  background-color: #1a1a1a;
   position: relative;
-  overflow: hidden;
+  min-height: 580px;
+  max-width: 1900px;
+  margin: 0 auto 270px;
 }
 
-.techCategories {
-  margin-top: 50px;
-}
-
-.techCategory {
-  margin-bottom: 40px;
-
-  h3 {
-    color: white;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 10px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 400;
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 40px;
-      height: 3px;
-      background-color: #07E0B0;
-    }
-  }
-}
-
-.techTags {
+.titleBlock {
+  padding: 20px;
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-end;
+  max-width: 670px;
+  background: #002010;
+  margin-bottom: 124px;
 
-.techTag {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: rgba(7, 224, 176, 0.1);
-  color: #ffffff; /* Изменили цвет текста на белый */
-  border: 1px solid rgba(7, 224, 176, 0.3);
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-family: 'IBM Plex Sans', sans-serif;
-  transition: all 0.3s ease;
+  @include mixins.corner-squares(#07e0b0, 14px);
 
-  &:hover {
-    background-color: rgba(7, 224, 176, 0.2);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(7, 224, 176, 0.1);
+  .squareTl {
+    @extend .square-tl;
+  }
+
+  .squareTr {
+    @extend .square-tr;
+  }
+
+  .squareBl {
+    @extend .square-bl;
+  }
+
+  .squareBr {
+    @extend .square-br;
   }
 }
 
-.backgroundAnimation {
-  height: 580px;
-  position: relative;
-  display: flex;
-  justify-content: center;
+.title {  
+  font-family: 'Orbitron';
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-@media (max-width: 768px) {
-  .techTags {
-    gap: 10px;
-  }
-  
-  .techTag {
-    padding: 8px 15px;
-    font-size: 0.85rem;
-  }
+.description {
+  font-family: 'IBM Plex Sans';
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
 }

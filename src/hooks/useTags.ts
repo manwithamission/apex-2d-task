@@ -1,33 +1,43 @@
-import { useEffect, RefObject } from "react";
+import { useEffect } from "react";
+import type { RefObject } from "react";
 import Matter from "matter-js";
 
-interface UseFallingWordsProps {
+interface UseTagsProps {
   words: string[];
   backgroundColor: string;
   widthPercentage: number;
   sceneRef: RefObject<HTMLDivElement>;
+  isInView?: boolean;
+  onWordClick?: (word: string) => void;
 }
 
 // Define a type for word bodies with custom properties
 interface WordBody extends Matter.Body {
   word: string;
-  color: string;
   width: number;
   height: number;
 }
 
-export const useFallingWords = ({
+export const useTags = ({
   words,
   backgroundColor,
   widthPercentage,
   sceneRef,
-}: UseFallingWordsProps) => {
+  isInView = false,
+  onWordClick,
+}: UseTagsProps) => {
   useEffect(() => {
     if (!sceneRef.current) return;
 
     // Calculate width based on the percentage of viewport width
     const viewportWidth = window.innerWidth;
-    const displayWidth = (viewportWidth * widthPercentage) / 100;
+    let displayWidth = (viewportWidth * widthPercentage) / 100;
+
+    // Limit to maximum 1900px
+    const MAX_WIDTH = 1900;
+    if (displayWidth > MAX_WIDTH) {
+      displayWidth = MAX_WIDTH;
+    }
 
     // Create the Matter.js engine with stronger gravity for faster falling
     const engine = Matter.Engine.create({
@@ -90,16 +100,52 @@ export const useFallingWords = ({
     Matter.Runner.run(Matter.Runner.create(), engine);
     Matter.Render.run(render);
 
+    // Handle canvas click events for interactivity
+    const handleCanvasClick = (event: MouseEvent) => {
+      if (!onWordClick) return;
+
+      // Get mouse position relative to canvas
+      const canvas = render.canvas;
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      // Find clicked body
+      const bodies = Matter.Composite.allBodies(engine.world).filter(
+        (body): body is WordBody => (body as WordBody).word !== undefined
+      );
+
+      for (const body of bodies) {
+        if (Matter.Bounds.contains(body.bounds, { x, y })) {
+          if (body.word === words[0]) {
+            // Only first tag is clickable
+            // Change appearance briefly when clicked
+            const originalStyle = body.render.strokeStyle;
+            body.render.strokeStyle = "#ffffff";
+
+            setTimeout(() => {
+              body.render.strokeStyle = originalStyle;
+            }, 200);
+
+            onWordClick(body.word);
+          }
+          break;
+        }
+      }
+    };
+
+    if (onWordClick) {
+      render.canvas.addEventListener("click", handleCanvasClick);
+    }
+
     // Function to create a word block
     const createWord = (word: string, index: number) => {
-      const color = "#ffffff"; // Изменили цвет на белый для лучшей контрастности
-
       // Create a temporary div to measure text size
       const div = document.createElement("div");
       div.textContent = word;
       div.style.position = "absolute";
       div.style.visibility = "hidden";
-      div.style.fontFamily = "Arial, sans-serif";
+      div.style.fontFamily = "Orbitron";
       div.style.fontSize = "18px";
       div.style.padding = "10px";
       document.body.appendChild(div);
@@ -115,7 +161,7 @@ export const useFallingWords = ({
         tempDiv.textContent = w;
         tempDiv.style.position = "absolute";
         tempDiv.style.visibility = "hidden";
-        tempDiv.style.fontFamily = "Arial, sans-serif";
+        tempDiv.style.fontFamily = "Orbitron";
         tempDiv.style.fontSize = "18px";
         tempDiv.style.padding = "10px";
         document.body.appendChild(tempDiv);
@@ -181,16 +227,15 @@ export const useFallingWords = ({
         frictionAir: 0.01,
         render: {
           fillStyle: "rgba(255,255,255,0.1)",
-          strokeStyle: color,
+          strokeStyle: "#07E0B0", // Using direct color instead of variable
           lineWidth: 1,
         },
       });
 
       // Add text data to the body
-      (body as any).word = word;
-      (body as any).color = color;
-      (body as any).width = width;
-      (body as any).height = height;
+      (body as WordBody).word = word;
+      (body as WordBody).width = width;
+      (body as WordBody).height = height;
 
       // Add the body to the world
       Matter.Composite.add(engine.world, body);
@@ -207,14 +252,14 @@ export const useFallingWords = ({
         const pair = pairs[i];
 
         // Check if one of the bodies is a word (not a wall)
-        if ((pair.bodyA as any).word) {
+        if ((pair.bodyA as WordBody).word) {
           // Add a slight rotation on collision
           Matter.Body.setAngularVelocity(
             pair.bodyA,
             (Math.random() - 0.5) * 0.05
           );
         }
-        if ((pair.bodyB as any).word) {
+        if ((pair.bodyB as WordBody).word) {
           Matter.Body.setAngularVelocity(
             pair.bodyB,
             (Math.random() - 0.5) * 0.05
@@ -230,15 +275,19 @@ export const useFallingWords = ({
       Matter.Body.setStatic(body, true);
     });
 
-    setTimeout(() => {
-      wordBodies.forEach((body) => {
-        Matter.Body.setStatic(body, false);
-        Matter.Body.setVelocity(body, {
-          x: (Math.random() - 0.5) * 2,
-          y: 0,
+    // Only start animation if section is in view
+    if (isInView) {
+      // Start animation with a small delay
+      setTimeout(() => {
+        wordBodies.forEach((body) => {
+          Matter.Body.setStatic(body, false);
+          Matter.Body.setVelocity(body, {
+            x: (Math.random() - 0.5) * 2,
+            y: 0,
+          });
         });
-      });
-    }, 2000);
+      }, 2000); // Reduced delay for better responsiveness when section comes into view
+    }
 
     // Custom render function to draw walls with gradient and text on bodies
     Matter.Events.on(render, "afterRender", () => {
@@ -278,6 +327,14 @@ export const useFallingWords = ({
       );
 
       // Draw bottom wall (floor) with gradient
+      // Add a visible line at the bottom of the canvas with primary color
+      ctx.strokeStyle = "#07E0B0"; // Primary teal color
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(0, 580 - 2); // 2px from bottom
+      ctx.lineTo(displayWidth, 580 - 2);
+      ctx.stroke();
+
       // Draw text bodies
       const bodies = Matter.Composite.allBodies(engine.world).filter(
         (body): body is WordBody => (body as WordBody).word !== undefined
@@ -288,27 +345,42 @@ export const useFallingWords = ({
         const pos = body.position;
         const width = body.width || body.bounds.max.x - body.bounds.min.x;
         const height = body.height || body.bounds.max.y - body.bounds.min.y;
-        const color = body.color;
 
         ctx.save();
         ctx.translate(pos.x, pos.y);
         ctx.rotate(body.angle);
 
-        // Draw tag background
-        ctx.fillStyle = "rgba(40, 44, 52, 0.8)";
-        ctx.strokeStyle = "#07E0B0"; // Оставляем обводку бирюзовой
-        ctx.lineWidth = 2;
+        // Draw tag background - special style for first tag to indicate it's clickable
+        const isFirstTag = body.word === words[0];
+        ctx.fillStyle = isFirstTag
+          ? "rgba(7, 224, 176, 0.15)"
+          : "rgba(40, 44, 52, 0.8)";
+        ctx.strokeStyle = "#07E0B0"; // Teal border color
+        ctx.lineWidth = isFirstTag ? 3 : 2; // Thicker border for clickable tag
         ctx.beginPath();
         ctx.roundRect(-width / 2, -height / 2, width, height, 6);
         ctx.fill();
         ctx.stroke();
 
         // Draw text
-        ctx.font = "bold 16px 'Orbitron', Arial, sans-serif";
+        ctx.font = `bold 16px 'Orbitron'`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillStyle = "#ffffff"; // Белый цвет для текста
+        ctx.fillStyle = "#ffffff";
         ctx.fillText(body.word, 0, 0);
+
+        // Add a small indicator for the clickable tag
+        if (isFirstTag) {
+          const linkIconSize = 8;
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(
+            width / 2 - linkIconSize - 5,
+            -height / 2 + 5,
+            linkIconSize,
+            linkIconSize
+          );
+        }
+
         ctx.restore();
       });
     });
@@ -316,11 +388,16 @@ export const useFallingWords = ({
     // Handle window resize
     const handleResize = () => {
       const newViewportWidth = window.innerWidth;
-      const newDisplayWidth = (newViewportWidth * widthPercentage) / 100;
+      let newDisplayWidth = (newViewportWidth * widthPercentage) / 100;
 
-      render.options.width = newDisplayWidth; // Set to displayWidth (80%)
+      // Limit to maximum width on resize too
+      if (newDisplayWidth > MAX_WIDTH) {
+        newDisplayWidth = MAX_WIDTH;
+      }
+
+      render.options.width = newDisplayWidth;
       render.options.height = 580; // Fixed height to match container
-      render.canvas.width = newDisplayWidth; // Set to displayWidth (80%)
+      render.canvas.width = newDisplayWidth;
       render.canvas.height = 580; // Fixed height to match container
 
       // Update floor position
@@ -346,11 +423,20 @@ export const useFallingWords = ({
 
     // Cleanup function
     return () => {
-      // clearInterval(interval);
+      if (onWordClick) {
+        render.canvas.removeEventListener("click", handleCanvasClick);
+      }
       window.removeEventListener("resize", handleResize);
       Matter.Render.stop(render);
       render.canvas.remove();
       Matter.Engine.clear(engine);
     };
-  }, [words, backgroundColor, widthPercentage, sceneRef]);
+  }, [
+    words,
+    backgroundColor,
+    widthPercentage,
+    sceneRef,
+    isInView,
+    onWordClick,
+  ]);
 };

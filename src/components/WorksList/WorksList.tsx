@@ -13,7 +13,15 @@ export const WorksList: React.FC = () => {
           </p>
         </div>
 
-        <div></div>
+        <div className={styles.worksList}>
+          <div className={styles.workItem}></div>
+
+          <div className={styles.workItem}>
+            <p className={styles.nxtTitle}>NXT ARMOR</p>
+          </div>
+
+          <div className={styles.workItem}></div>
+        </div>
       </div>
     </section>
   );

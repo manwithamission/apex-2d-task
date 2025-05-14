@@ -1,9 +1,0 @@
-.fallingWordsContainer {
-  position: absolute;
-  top: 0;
-  left: 10%; // 10% от левого края (для центрирования ширины 80%)
-  height: 580px; // Ограничение высоты до 580px
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden; // Контент не должен выходить за границы
-}

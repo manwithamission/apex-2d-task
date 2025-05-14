@@ -1,80 +1,34 @@
+import { ArrowIcon } from "../common/icons";
 import styles from "./DevExperience.module.scss";
 
-interface ExperienceItem {
-  id: number;
-  title: string;
-  description: string;
-  icon: string;
-}
-
 export const DevExperience = () => {
-  const experienceItems: ExperienceItem[] = [
-    {
-      id: 1,
-      title: "Agile-методология",
-      description:
-        "Мы используем гибкие методологии разработки, такие как Scrum и Kanban, которые позволяют нам быстро адаптироваться к изменениям и поддерживать прозрачность процесса для клиентов.",
-      icon: "agile",
-    },
-    {
-      id: 2,
-      title: "Тестирование и QA",
-      description:
-        "Каждый проект проходит тщательное тестирование на всех этапах разработки, включая модульное, интеграционное и End-to-End тестирование для обеспечения высокого качества продукта.",
-      icon: "testing",
-    },
-    {
-      id: 3,
-      title: "Чистый код",
-      description:
-        "Мы придерживаемся принципов чистого кода, который легко поддерживать и масштабировать. Регулярные код-ревью и стандарты кодирования обеспечивают высокое качество кодовой базы.",
-      icon: "code",
-    },
-    {
-      id: 4,
-      title: "CI/CD",
-      description:
-        "Автоматизированные процессы сборки, тестирования и развертывания позволяют нам быстро и безопасно доставлять обновления приложений в производственную среду.",
-      icon: "cicd",
-    },
-    {
-      id: 5,
-      title: "Оптимизация производительности",
-      description:
-        "Мы уделяем особое внимание производительности приложений, оптимизируя время загрузки, отзывчивость интерфейса и эффективность работы с данными.",
-      icon: "performance",
-    },
-    {
-      id: 6,
-      title: "Масштабируемая архитектура",
-      description:
-        "Наши решения проектируются с учетом возможного роста и масштабирования, что позволяет системам справляться с увеличением нагрузки и количества пользователей.",
-      icon: "architecture",
-    },
-  ];
-
   return (
     <section id="dev-experience" className={styles.devExpSection}>
-      <div className="container">
-        <div className="section-header">
-          <h2>Опыт разработки</h2>
-          <p className="subheading">
-            Наш подход к разработке программного обеспечения
-          </p>
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <p className={styles.count}>03</p>
+          <p className={styles.count}>02</p>
+          <p className={styles.count}>01</p>
         </div>
-
-        <div className={styles.experienceGrid}>
-          {experienceItems.map((item) => (
-            <div className={styles.experienceCard} key={item.id}>
-              <div className={styles.cardIcon}>
-                <div className={`${styles.icon} ${styles[item.icon]}`}></div>
-              </div>
-              <div className={styles.cardContent}>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
+        <div className={styles.right}>
+          <div className={styles.rightTop}>
+            <ArrowIcon width={86} height={86} className={styles.arrowIcon} />
+            <div className={styles.rightTopText}>
+              <p className={styles.mediumText}> &#123; DEVELOPMENT &#125;</p>
+              <p className={styles.boldText}>PATH</p>
             </div>
-          ))}
+          </div>
+          <div className={styles.rightBottom}>
+            <p className={styles.devText}>Discovery & Planning Analysis</p>
+            <p className={styles.description}>
+              We analyze your vision, define requirements, and map out the best
+              technology stack to bring your idea to life.
+            </p>
+            <div className={styles.squareTl} />
+            <div className={styles.squareTr} />
+            <div className={styles.squareBl} />
+            <div className={styles.squareBr} />
+          </div>
         </div>
       </div>
     </section>
