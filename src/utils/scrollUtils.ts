@@ -1,9 +1,3 @@
-/**
- * Smoothly scrolls to a section specified by ID
- * @param sectionId - The ID of the section to scroll to (without the # symbol)
- * @param event - The click event, used to prevent default navigation
- * @param headerOffset - Optional offset to account for fixed header height (defaults to 80px)
- */
 export const scrollToSection = (
   sectionId: string,
   event: React.MouseEvent,

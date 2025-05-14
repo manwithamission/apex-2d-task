@@ -6,6 +6,7 @@
 
 .container {
   padding-bottom: 124px;
+  position: relative;
 }
 
 .header {
@@ -49,6 +50,12 @@
   background-size: cover;
   background-position: center;
   position: relative;
+  cursor: none;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
   
   &:nth-child(1) {
     background-position: right;
@@ -78,4 +85,19 @@
   line-height: 100%;
 
   color: #E4E4E4;
+}
+
+.circleTooltip {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease;
+  will-change: opacity, transform;
+  user-select: none;
+  width: 124px;
+  height: 124px;
+  background: #E4E4E4;
+  mix-blend-mode: difference;
+  border-radius: 50%;
 }

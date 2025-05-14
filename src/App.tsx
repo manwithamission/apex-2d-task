@@ -6,11 +6,13 @@ import { WorksList } from "./components/WorksList/WorksList";
 import { Technologies } from "./components/Technologies/Technologies";
 import { DevExperience } from "./components/DevExperience/DevExperience";
 import { Footer } from "./components/Footer/Footer";
+import { CustomCursor } from "./components/CustomCursor/CustomCursor";
 
 export const App = () => {
   return (
     <>
       <div className={styles.appContainer}>
+        <CustomCursor />
         <Header />
         <Main />
         <div className={styles.middleContent}>

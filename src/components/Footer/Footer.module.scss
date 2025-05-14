@@ -141,7 +141,7 @@
     display: none;
 
     &:checked + .visualCheckbox span {
-      content: "x"; // или можно вставить SVG-галочку
+      content: "x"; 
       color: #07e0b0;
     }
   }

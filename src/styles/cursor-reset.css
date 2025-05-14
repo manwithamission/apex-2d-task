@@ -1,0 +1,8 @@
+* {
+  /* cursor: none !important; */
+}
+
+a, button, input, textarea, select, option, 
+[role="button"], [tabindex]:not([tabindex="-1"]) {
+  /* cursor: none !important; */
+}

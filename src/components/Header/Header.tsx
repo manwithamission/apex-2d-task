@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import styles from "./Header.module.scss";
 import { scrollToSection } from "../../utils/scrollUtils";
 import { cn } from "../../utils/classUtils";
-import { getBackgroundImage } from "../../utils/assetUtils";
 import { PixelIcon } from "../common/icons/PixelIcon";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Handle scroll event to change header style when scrolling
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -27,9 +25,7 @@ export const Header = () => {
     };
   }, []);
 
-  // Handle scroll-to-section with mobile menu closing
   const handleSectionClick = (sectionId: string, event: React.MouseEvent) => {
-    console.log(sectionId, "sectionId");
     scrollToSection(sectionId, event);
     if (mobileMenuOpen) {
       setMobileMenuOpen(false);
@@ -42,7 +38,7 @@ export const Header = () => {
         <a href="#main" className={styles.logo}>
           <img
             className={cn(styles.logoImage)}
-            src={getBackgroundImage("logo.png")}
+            src={"/images/backgrounds/logo.png"}
             alt="Logo"
           />
         </a>
@@ -96,7 +92,7 @@ export const Header = () => {
           <button className={cn("btn", "primary", styles.quoteButton)}>
             <p className={styles.quoteText}>[ get a quote ]</p>
           </button>
-          <PixelIcon className={styles.pixelIcon} height={42} width={26} />
+          <PixelIcon className={styles.pixelIcon} height={40} width={26} />
         </div>
       </div>
     </header>

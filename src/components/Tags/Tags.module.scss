@@ -3,6 +3,7 @@
   max-width: 1900px;
   margin: 0 auto;
   z-index: 0;
+  position: relative;
   
   .canvasContainer {
     width: 100%;
@@ -15,5 +16,33 @@
   
   canvas {
     max-width: 100%;
+  }
+  
+  .wordTooltip {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    transform: translate(-50%, -100%); /* Position above cursor */
+    transition: opacity 0.15s ease;
+    will-change: opacity;
+    
+    span {
+      font-size: 9px;
+      font-family: 'Orbitron';
+      font-weight: 500;
+      opacity: 0.8;
+      color: #050505;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .wordTooltipContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
   }
 }
